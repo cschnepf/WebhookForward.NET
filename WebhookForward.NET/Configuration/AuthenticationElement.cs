@@ -10,8 +10,7 @@ namespace WebhookForward.Configuration
 	{
 		#region Properties
 
-		[ConfigurationProperty("password", IsRequired = true)]
-		[StringValidator(MinLength = 1, MaxLength = 60)]
+		[ConfigurationProperty("password", IsRequired = false)]
 		public String Password
 		{
 			get
@@ -24,8 +23,7 @@ namespace WebhookForward.Configuration
 			}
 		}
 
-		[ConfigurationProperty("username", IsRequired = true)]
-		[StringValidator(InvalidCharacters = "~!@#$%^&*()[]{}/;'\"|\\", MinLength = 1, MaxLength = 60)]
+		[ConfigurationProperty("username", IsRequired = false)]
 		public String Username
 		{
 			get

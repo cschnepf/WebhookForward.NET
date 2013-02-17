@@ -10,8 +10,7 @@ namespace WebhookForward.Configuration
 	{
 		#region Properties
 
-		[ConfigurationProperty("name", IsRequired = true)]
-		[StringValidator(InvalidCharacters = "~!@#$%^&*()[]{}/;'\"|\\", MinLength = 1, MaxLength = 60)]
+		[ConfigurationProperty("name", IsRequired = false)]
 		public String Name
 		{
 			get

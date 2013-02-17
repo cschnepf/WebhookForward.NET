@@ -21,24 +21,18 @@ namespace WebhookForward.NET
 
 		private void btnStart_Click(object sender, EventArgs e)
 		{
-			//CouchConfiguration c = new CouchConfiguration("")
-			//    {
-			//        Host = "tuneuplog.cloudant.com",
-			//        Port = 80,
-			//        User = "tuneuplog",
-			//        Password = "yVFufKlACQLk",
-			//        Database = "hooks"
-			//    };
+			string databaseName = txtDatabase.Text;
+
 			var client = new CouchClient(
-				"tuneuplog.cloudant.com",
-				443,
-				"tuneuplog",
-				"yVFufKlACQLk",
-				true,
+				txtHost.Text,
+				Int32.Parse(txtPort.Text),
+				txtUsername.Text,
+				txtPassword.Text,
+				chkHttps.Checked,
 				AuthenticationType.Basic);
 
-			bool x = client.HasDatabase("hooks");
-			var db = client.GetDatabase("hooks");
+			bool x = client.HasDatabase(databaseName);
+			var db = client.GetDatabase(databaseName);
 
 			var docs = db.GetAllDocuments();
 			foreach (var doc in docs.Docs)

@@ -10,8 +10,7 @@ namespace WebhookForward.Configuration
 	{
 		#region Properties
 
-		[ConfigurationProperty("host", IsRequired = true)]
-		[StringValidator(InvalidCharacters = "~!@#$%^&*()[]{}/;'\"|\\", MinLength = 1, MaxLength = 60)]
+		[ConfigurationProperty("host", IsRequired = false)]
 		public String Host
 		{
 			get
@@ -24,7 +23,7 @@ namespace WebhookForward.Configuration
 			}
 		}
 
-		[ConfigurationProperty("port", DefaultValue = "80", IsRequired = true)]
+		[ConfigurationProperty("port", DefaultValue = "80", IsRequired = false)]
 		[IntegerValidator]
 		public int Port
 		{
@@ -38,7 +37,7 @@ namespace WebhookForward.Configuration
 			}
 		}
 
-		[ConfigurationProperty("useHttps", DefaultValue = "false", IsRequired = true)]
+		[ConfigurationProperty("useHttps", DefaultValue = "false", IsRequired = false)]
 		public bool UseHttps
 		{
 			get
