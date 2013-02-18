@@ -82,6 +82,21 @@ namespace WebhookForward.NET
 					lstWebhooks.Items.Add(key);
 				}
 			}
+
+			if (chkPostAll.Checked)
+			{
+				List<string> items = new List<string>();
+
+				foreach (var item in lstWebhooks.Items)
+				{
+					items.Add(item.ToString());
+				}
+
+				foreach (var postedItem in items)
+				{
+					Post(_database.GetDocument<WebhookDocument>(postedItem));
+				}
+			}
 		}
 
 		private void WebhookForward_Load(object sender, EventArgs e)
@@ -96,6 +111,7 @@ namespace WebhookForward.NET
 			txtPassword.Text = defaultOptions.Authentication.Password;
 			txtDatabase.Text = defaultOptions.Database.Name;
 			txtWebhookUrl.Text = defaultOptions.WebhookPostInformation.WebhookUrl;
+			chkPostAll.Checked = defaultOptions.WebhookPostInformation.PostAll;
 		}
 
 		#endregion Methods
@@ -111,27 +127,30 @@ namespace WebhookForward.NET
 
 			foreach (var postedItem in postedItems)
 			{
-				WebhookDocument webhookDocument = _database.GetDocument<WebhookDocument>(postedItem.ToString());
-
-				HttpWebRequest request = (HttpWebRequest)WebRequest.Create(txtWebhookUrl.Text);
-				request.Method = "POST";
-				request.ContentType = "application/json; charset:utf-8";
-				StreamWriter writer = new StreamWriter(request.GetRequestStream());
-				JObject body = JObject.Parse(webhookDocument.req.body);
-				writer.Write(body);
-				writer.Close();
-				HttpWebResponse response = request.GetResponse() as HttpWebResponse;
-				if (response.StatusCode == HttpStatusCode.OK)
-				{
-					Delete(webhookDocument);
-				}
+				Post(_database.GetDocument<WebhookDocument>(postedItem));
 			}
 		}
 
-		private void Delete(WebhookDocument doc)
+		private void Post(WebhookDocument webhookDocument)
 		{
-			_database.DeleteDocument(doc._id, doc._rev);
-			lstWebhooks.Items.Remove(doc._id);
+			HttpWebRequest request = (HttpWebRequest)WebRequest.Create(txtWebhookUrl.Text);
+			request.Method = "POST";
+			request.ContentType = "application/json; charset:utf-8";
+			StreamWriter writer = new StreamWriter(request.GetRequestStream());
+			JObject body = JObject.Parse(webhookDocument.req.body);
+			writer.Write(body);
+			writer.Close();
+			HttpWebResponse response = request.GetResponse() as HttpWebResponse;
+			if (response.StatusCode == HttpStatusCode.OK)
+			{
+				Delete(webhookDocument);
+			}
+		}
+
+		private void Delete(WebhookDocument webhookDocument)
+		{
+			_database.DeleteDocument(webhookDocument._id, webhookDocument._rev);
+			lstWebhooks.Items.Remove(webhookDocument._id);
 		}
 
 		private void btnDelete_Click(object sender, EventArgs e)

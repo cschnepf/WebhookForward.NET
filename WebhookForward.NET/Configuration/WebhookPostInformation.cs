@@ -20,5 +20,18 @@ namespace WebhookForward.Configuration
 				this["webhookUrl"] = value;
 			}
 		}
+
+		[ConfigurationProperty("postAll", DefaultValue = "false", IsRequired = false)]
+		public bool PostAll
+		{
+			get
+			{
+				return (bool)this["postAll"];
+			}
+			set
+			{
+				this["postAll"] = value;
+			}
+		}
 	}
 }
