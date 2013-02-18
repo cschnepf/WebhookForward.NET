@@ -61,6 +61,8 @@
     <Compile Include="Configuration\DatabaseElement.cs" />
     <Compile Include="Configuration\DefaultOptionsSection.cs" />
     <Compile Include="Configuration\ServerInformationElement.cs" />
+    <Compile Include="Configuration\WebhookPostInformation.cs" />
+    <Compile Include="JSon\WebhookDocument.cs" />
     <Compile Include="WebhookForward.cs">
       <SubType>Form</SubType>
     </Compile>

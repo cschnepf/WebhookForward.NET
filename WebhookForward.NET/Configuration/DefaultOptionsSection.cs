@@ -49,6 +49,20 @@ namespace WebhookForward.Configuration
 			}
 		}
 
+		[ConfigurationProperty("webhookPostInformation")]
+		public WebhookPostInformation WebhookPostInformation
+		{
+			get
+			{
+				return (WebhookPostInformation)this["webhookPostInformation"];
+			}
+			set
+			{
+				this["webhookPostInformation"] = value;
+			}
+		}
+
+
 		#endregion Properties
 	}
 }

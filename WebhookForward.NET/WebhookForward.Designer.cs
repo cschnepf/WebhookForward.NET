@@ -28,6 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.components = new System.ComponentModel.Container();
 			this.txtWebhookUrl = new System.Windows.Forms.TextBox();
 			this.lblWebhookUrl = new System.Windows.Forms.Label();
 			this.lblCouchDBHost = new System.Windows.Forms.Label();
@@ -47,6 +48,7 @@
 			this.lblPassword = new System.Windows.Forms.Label();
 			this.lblDatabase = new System.Windows.Forms.Label();
 			this.txtDatabase = new System.Windows.Forms.TextBox();
+			this.tim_HookQuery = new System.Windows.Forms.Timer(this.components);
 			this.SuspendLayout();
 			// 
 			// txtWebhookUrl
@@ -92,6 +94,7 @@
 			this.btnStop.TabIndex = 15;
 			this.btnStop.Text = "S&top";
 			this.btnStop.UseVisualStyleBackColor = true;
+			this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
 			// 
 			// btnDelete
 			// 
@@ -101,6 +104,7 @@
 			this.btnDelete.TabIndex = 14;
 			this.btnDelete.Text = "&Delete";
 			this.btnDelete.UseVisualStyleBackColor = true;
+			this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
 			// 
 			// btnPost
 			// 
@@ -110,6 +114,7 @@
 			this.btnPost.TabIndex = 13;
 			this.btnPost.Text = "&Post";
 			this.btnPost.UseVisualStyleBackColor = true;
+			this.btnPost.Click += new System.EventHandler(this.btnPost_Click);
 			// 
 			// lstWebhooks
 			// 
@@ -210,6 +215,10 @@
 			this.txtDatabase.Size = new System.Drawing.Size(100, 20);
 			this.txtDatabase.TabIndex = 28;
 			// 
+			// tim_HookQuery
+			// 
+			this.tim_HookQuery.Tick += new System.EventHandler(this.tim_HookQuery_Tick);
+			// 
 			// WebhookForward
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -263,6 +272,7 @@
 		private System.Windows.Forms.Label lblPassword;
 		private System.Windows.Forms.Label lblDatabase;
 		private System.Windows.Forms.TextBox txtDatabase;
+		private System.Windows.Forms.Timer tim_HookQuery;
 	}
 }
 
